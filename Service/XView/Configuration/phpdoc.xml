@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>X-View Service Document</title>
+    <parser>
+        <target>../Doc/Html</target>
+        <encoding>utf8</encoding>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+    </parser>
+    
+    <transformer>
+        <target>../Doc/Html</target>
+    </transformer>
+    
+    <transformations>
+        <template name="clean" />
+    </transformations>
+    
+    <files>
+        <directory>../</directory>
+        <ignore>../Test/*</ignore>
+        <ignore>../Configuration/*</ignore>
+    </files>
+</phpdoc>
