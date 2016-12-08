@@ -12,7 +12,9 @@ class Authorize extends WebAction {
     );
     
     /**
-     * {@inheritDoc}
+     * @param string $client_id Required in GET
+     * @param string $response_type Required in GET
+     * @param string $state Required in GET
      * @see \X\Service\XAction\Core\Util\Action::runAction()
      */
     public function runAction( $form=array() ) {

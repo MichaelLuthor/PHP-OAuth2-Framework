@@ -28,7 +28,9 @@ class Service extends XService {
         $storageHandler = sprintf('\\OAuth2\\Storage\\%s', $config->get('storage_handler'));
         $storage = new $storageHandler($config->get('storage_params'));
         
-        $server = new \OAuth2\Server($storage);
+        $server = new \OAuth2\Server($storage, array(
+            'allow_credentials_in_request_body' => $config->get('allow_credentials_in_request_body'),
+        ));
         if ( $config->get('enable_grant_type_client_credentials', true) ) {
             $server->addGrantType(new \OAuth2\GrantType\ClientCredentials($storage));
         }
