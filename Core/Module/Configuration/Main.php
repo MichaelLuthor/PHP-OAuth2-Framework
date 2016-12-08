@@ -9,4 +9,8 @@ return array (
   array (
     'enable' => true,
   ),
+  'API' => 
+  array (
+    'enable' => true,
+  ),
 );
