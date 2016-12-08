@@ -3,6 +3,7 @@
 ## Functions
 - Management clients. (*Planning*)
 - Management APIs. (*Planning*)
+- Testing APIs online. (*Planning*)
 - Custom Authoriza page. (*Planning*)
 - Export API document. (*Planning*)
 - Generate SDK package for mutil languages. (*Planning*)
