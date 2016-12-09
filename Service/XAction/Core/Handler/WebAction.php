@@ -36,12 +36,8 @@ abstract class WebAction extends \X\Service\XAction\Core\Util\Action {
      * @param string $url The target url to jump to.
      * @param array  $parms The parameters to that url
      */
-    public function gotoURL( $url, $parms=null, $format=true ) {
-        if ( $format ) {
-            $url = URLHandler::format($this->createURL($url, $parms));
-        } else {
-            $url = $this->createURL($url, $parms);
-        }
+    public function gotoURL( $url, $parms=null) {
+        $url = $this->createURL($url, $parms);
         header("Location: $url");
         X::system()->stop();
     }

@@ -13,4 +13,8 @@ return array (
   array (
     'enable' => true,
   ),
+  'Workspace' => 
+  array (
+    'enable' => true,
+  ),
 );
