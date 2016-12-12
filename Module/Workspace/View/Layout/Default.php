@@ -3,6 +3,8 @@
 $this->title = "Workspace";
 $this->getMetaManager()->setCharset('UTF-8');
 
+$vars = get_defined_vars();
+
 $link = $this->getLinkManager();
 $link->addCSS('bootstrap', '/assets/library/bootstrap/css/bootstrap.min.css');
 $link->addCSS('admin-lte', '/assets/library/admin-lte/css/AdminLTE.min.css');
@@ -18,6 +20,9 @@ $script->add('app')->setSource('/assets/library/admin-lte/js/app.js');
 $script->add('dashboard')->setSource('/assets/library/admin-lte/js/pages/dashboard.js');
 $script->add('demo')->setSource('/assets/library/admin-lte/js/demo.js');
 $script->add('init')->setContent("$.widget.bridge('uibutton', $.ui.button);");
+
+$menu = $vars['menu'];
+$activeMenuItem = $vars['activeMenuItem'];
 ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -54,72 +59,32 @@ $script->add('init')->setContent("$.widget.bridge('uibutton', $.ui.button);");
   
   <aside class="main-sidebar">
     <section class="sidebar">
-      <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">Main</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-credit-card"></i> <span>Clients</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>Management</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>New Client</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-flask"></i>
-            <span>APIs</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>Management</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>New API</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa  fa-map-signs"></i>
-            <span>Test</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>Authoriza</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>API</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-book"></i>
-            <span>Document</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>Online</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Export</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-th"></i>
-            <span>SDK</span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>PHP</a></li>
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>JavaScript</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Python</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Objective-C</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>C++</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>C</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Swift</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Go</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Ruby</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>JAVA</a></li>
-          </ul>
-        </li>
-        
-        <li class="header">Configuration</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>OAuth</span></a></li>
+      <?php foreach ( $menu as $menuGroup ) : ?>
+        <li class="header"><?php echo $menuGroup['title']; ?></li>
+        <?php foreach ( $menuGroup['menu'] as $menuItemKey => $menuItem ) :?>
+          <?php if (isset($menuItem['subMenu'])): ?>
+          <li class="treeview <?php if($activeMenuItem['main']===$menuItemKey):?>active<?php endif;?>">
+            <a href="#">
+              <i class="fa fa-flask"></i>
+              <span><?php echo $menuItem['title']; ?></span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+            <?php foreach ( $menuItem['subMenu'] as $subMenuItemKey => $subMenuItem ) : ?>
+              <li class="<?php if($activeMenuItem['sub']===$subMenuItemKey):?>active<?php endif;?>">
+                <a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i><?php echo $subMenuItem['title']; ?></a>
+              </li>
+            <?php endforeach;?>
+            </ul>
+          </li>
+          <?php else :?>
+          <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span><?php echo $menuItem['title']; ?></span></a></li>
+          <?php endif;?>
+        <?php endforeach; ?>
+      <?php endforeach; ?>
       </ul>
     </section>
   </aside>
@@ -134,7 +99,12 @@ $script->add('init')->setContent("$.widget.bridge('uibutton', $.ui.button);");
     </section>
 
     <section class="content">
-    CONTAINE
+    <?php 
+    $particleManager = $this->getParticleViewManager();
+    foreach ( $particleManager->getList() as $particleName ) {
+        $particleManager->get($particleName)->display();
+    }
+    ?>
     </section>
   </div>
   

@@ -41,6 +41,12 @@ abstract class PageAction extends WebAction {
      * @see \X\Service\XAction\Core\Util\Action::afterRunAction()
      */
     protected function afterRunAction() {
+        $menu = $this->getModule()->getConfiguration('Menu')->toArray();
+        $this->pageView->getDataManager()->setValues(array(
+            'menu' => $menu,
+            'activeMenuItem' => $this->getActiveMenuItem(),
+        ));
+        
         $path = X::system()->getPath("Module/Workspace/View/Layout/{$this->layout}.php");
         $this->pageView->setLayout($path);
         $this->pageView->display();
@@ -67,4 +73,10 @@ abstract class PageAction extends WebAction {
         }
         return X::system()->getModuleManager()->get($name);
     }
+    
+    /** 
+     * @return array 
+     * @example array('main'=>'api', 'sub'=>'list')
+     */
+    abstract protected function getActiveMenuItem();
 }

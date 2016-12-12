@@ -1,10 +1,10 @@
 <?php
-namespace X\Module\API\Action;
+namespace X\Module\API\Action\User;
 use X\Core\X;
 use X\Service\XAction\Core\Handler\WebAction;
 use X\Service\OAuth2\Service as OAuth2Service;
 /**
- * 获取当前API版本号
+ * 获取用户通知数量。
  * @author michaelluthor
  * michaelluthor
  * @since V0.0.0
@@ -13,7 +13,7 @@ use X\Service\OAuth2\Service as OAuth2Service;
  *  DOn Ut Use is.
  * @link http://www.baidu.com
  */
-class Version extends WebAction {
+class GetNotificationCount extends WebAction {
     /**
      * {@inheritDoc}
      * @see \X\Service\XAction\Core\Util\Action::runAction()
