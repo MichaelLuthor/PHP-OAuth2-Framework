@@ -100,9 +100,12 @@ class Index extends PageAction {
     
     /**
      * {@inheritDoc}
-     * @see \X\Module\Workspace\Util\PageAction::getActiveMenuItem()
+     * @see \X\Module\Workspace\Util\PageAction::getPageOption()
      */
-    protected function getActiveMenuItem() {
-        return array('main'=>'api', 'sub'=>'management');
+    protected function getPageOption() {
+        return array(
+            'title' => 'Management',
+            'activeMenu' => array('main'=>'api', 'sub'=>'management'),
+        );
     }
 }

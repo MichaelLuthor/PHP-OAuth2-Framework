@@ -18,7 +18,7 @@ class Version extends WebAction {
      * {@inheritDoc}
      * @see \X\Service\XAction\Core\Util\Action::runAction()
      */
-    public function runAction() {
+    public function runAction( $name, $value) {
         /** @var $oauthService OAuth2Service */
         $oauthService = X::system()->getServiceManager()->get(OAuth2Service::getServiceName());
         if (!$oauthService->verifyResourceRequest(\OAuth2\Request::createFromGlobals())) {

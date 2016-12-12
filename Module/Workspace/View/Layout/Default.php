@@ -21,6 +21,7 @@ $script->add('dashboard')->setSource('/assets/library/admin-lte/js/pages/dashboa
 $script->add('demo')->setSource('/assets/library/admin-lte/js/demo.js');
 $script->add('init')->setContent("$.widget.bridge('uibutton', $.ui.button);");
 
+$title = $vars['title'];
 $menu = $vars['menu'];
 $activeMenuItem = $vars['activeMenuItem'];
 ?>
@@ -75,7 +76,8 @@ $activeMenuItem = $vars['activeMenuItem'];
             <ul class="treeview-menu">
             <?php foreach ( $menuItem['subMenu'] as $subMenuItemKey => $subMenuItem ) : ?>
               <li class="<?php if($activeMenuItem['sub']===$subMenuItemKey):?>active<?php endif;?>">
-                <a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i><?php echo $subMenuItem['title']; ?></a>
+                <?php $subMenuItem['link'] = isset($subMenuItem['link']) ? $subMenuItem['link'] : '#';?>
+                <a href="<?php echo $subMenuItem['link']; ?>"><i class="fa fa-circle-o"></i><?php echo $subMenuItem['title']; ?></a>
               </li>
             <?php endforeach;?>
             </ul>
@@ -91,11 +93,7 @@ $activeMenuItem = $vars['activeMenuItem'];
 
   <div class="content-wrapper">
     <section class="content-header">
-      <h1>Dashboard<small>Control panel</small></h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
+      <h1><?php echo $title; ?></h1>
     </section>
 
     <section class="content">

@@ -41,6 +41,11 @@ class User {
         $_SESSION = array();
     }
     
+    /** @return array */
+    public static function getCurrentAccount() {
+        return $_SESSION['CurrentAccount'];
+    }
+    
     /** @return string */
     private static function encryptPassword($password) {
         return $password;

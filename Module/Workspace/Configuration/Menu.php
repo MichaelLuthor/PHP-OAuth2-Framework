@@ -6,8 +6,8 @@ return array(
         'api' => array(
             'title' => 'API',
             'subMenu' => array(
-                'management' => array('title'=>'Management'),
-                'new' => array('title'=>'New API'),
+                'management' => array('title'=>'Management','link'=>'/index.php?module=Workspace&action=API/Index'),
+                'new' => array('title'=>'New API','link'=>'/index.php?module=Workspace&action=API/Create'),
             ),
         ),
         'test' => array(
