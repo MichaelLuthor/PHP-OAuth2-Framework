@@ -14,22 +14,33 @@ class Create extends PageAction {
      */
     public function runAction() {
         $error = null;
+        $form = array();
         if ( isset($_POST['form']) ) {
+            $form = $_POST['form'];
             try {
                 $this->generateAPIAction($_POST['form']);
                 $this->gotoURL('/index.php?module=Workspace&action=API/Index');
             } catch ( \Exception $e ) {
                 $error = $e->getMessage();
             }
+        } else {
+            $form = array(
+                'param' => array(),
+                'name' => '',
+                'description' => '',
+            );
         }
+        
         $create = $this->addParticle('API/Create');
         $create->getDataManager()->set('error', $error);
+        $create->getDataManager()->set('form', $form);
     }
     
     /**
      * @param unknown $form
      */
     private function generateAPIAction($form) {
+        $this->validateFormData($form);
         $form['name'] = explode('\\', $form['name']);
         $form['name'] = array_map('ucfirst', $form['name']);
         $form['name'] = implode('\\', $form['name']);
@@ -71,6 +82,13 @@ class Create extends PageAction {
         }
         $actionPath = $actionPath.DIRECTORY_SEPARATOR.$form['name'].'.php';
         file_put_contents($actionPath, $actionContent);
+    }
+    
+    /** @return void */
+    private function validateFormData( $form ) {
+        if ( empty($form['name']) ) {
+            throw new \Exception('API name could not be empty.');
+        }
     }
     
     /**
