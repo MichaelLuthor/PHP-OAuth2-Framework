@@ -14,7 +14,7 @@ return array(
             'title' => 'Test',
             'subMenu' => array(
                 'authorization' => array('title'=>'Authorization','link'=>'/index.php?module=Workspace&action=Test/Authorization'),
-                'api' => array('title'=>'API'),
+                'api' => array('title'=>'API','link'=>'/index.php?module=Workspace&action=Test/API'),
             ),
         ),
         'document' => array(
