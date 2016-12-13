@@ -13,7 +13,7 @@ return array(
         'test' => array(
             'title' => 'Test',
             'subMenu' => array(
-                'authorization' => array('title'=>'Authorization'),
+                'authorization' => array('title'=>'Authorization','link'=>'/index.php?module=Workspace&action=Test/Authorization'),
                 'api' => array('title'=>'API'),
             ),
         ),
