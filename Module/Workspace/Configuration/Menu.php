@@ -20,7 +20,7 @@ return array(
         'document' => array(
             'title' => 'Document',
             'subMenu' => array(
-                'online' => array('title'=>'Online'),
+                'online' => array('title'=>'Online','link'=>'/index.php?module=Workspace&action=Document/Online'),
                 'export' => array('title'=>'Export'),
             ),
         ),
