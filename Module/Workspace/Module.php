@@ -22,6 +22,7 @@ class Module extends XModule {
         $namespace = substr($namespace, 0, strrpos($namespace, '\\'));
         $group = $this->getName();
         $actionService->addGroup($group, $namespace);
+        $actionService->setGroupDefaultAction($group, 'index');
         $actionService->getParameterManager()->merge($parameters);
         return $actionService->runGroup($group);
     }

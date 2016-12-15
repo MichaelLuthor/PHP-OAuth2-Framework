@@ -21,7 +21,7 @@ return array(
             'title' => 'Document',
             'subMenu' => array(
                 'online' => array('title'=>'Online','link'=>'/index.php?module=Workspace&action=Document/Online'),
-                'export' => array('title'=>'Export'),
+                'export' => array('title'=>'Export', 'link'=>'/index.php?module=Workspace&action=Document/Export'),
             ),
         ),
         'sdk' => array(

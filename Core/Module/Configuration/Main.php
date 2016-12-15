@@ -3,7 +3,7 @@ return array (
   'SystemManager' => 
   array (
     'enable' => true,
-    'default' => true,
+    'default' => false,
   ),
   'OAuth2' => 
   array (
@@ -16,5 +16,6 @@ return array (
   'Workspace' => 
   array (
     'enable' => true,
+    'default' => true,
   ),
 );
