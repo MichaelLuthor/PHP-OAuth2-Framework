@@ -42,12 +42,14 @@ abstract class PageAction extends WebAction {
      */
     protected function afterRunAction() {
         $pageOption = $this->getPageOption();
-        $menu = $this->getModule()->getConfiguration('Menu')->toArray();
-        $this->pageView->getDataManager()->setValues(array(
-            'menu' => $menu,
-            'activeMenuItem' => $pageOption['activeMenu'],
-            'title' => $pageOption['title'],
-        ));
+        if ( false !== $pageOption ) {
+            $menu = $this->getModule()->getConfiguration('Menu')->toArray();
+            $this->pageView->getDataManager()->setValues(array(
+                'menu' => $menu,
+                'activeMenuItem' => $pageOption['activeMenu'],
+                'title' => $pageOption['title'],
+            ));
+        }
         
         $path = X::system()->getPath("Module/Workspace/View/Layout/{$this->layout}.php");
         $this->pageView->setLayout($path);
@@ -80,5 +82,7 @@ abstract class PageAction extends WebAction {
      * @return array 
      * @example array('main'=>'api', 'sub'=>'list')
      */
-    abstract protected function getPageOption();
+    protected function getPageOption() {
+        return false;
+    }
 }

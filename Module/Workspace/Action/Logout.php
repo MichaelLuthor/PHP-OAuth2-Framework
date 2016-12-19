@@ -1,8 +1,8 @@
 <?php
 namespace X\Module\Workspace\Action;
-use X\Module\Workspace\Util\PageAction;
 use X\Module\Workspace\Util\User;
-class Logout extends PageAction {
+use X\Service\XAction\Core\Handler\WebAction;
+class Logout extends WebAction {
     /**
      * {@inheritDoc}
      * @see \X\Service\XAction\Core\Util\Action::runAction()
